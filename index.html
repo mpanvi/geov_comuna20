@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>TALLER 2 DISEÑOS DE PROYECTOS EN SIG </title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Comuna20_1.js"></script>
+        <script src="data/Barrioscomuna20_2.js"></script>
+        <script src="data/Manzanascomuna20_3.js"></script>
+        <script src="data/EqupamentosBienestarsoc_4.js"></script>
+        <script src="data/EquipamentosCementerios_5.js"></script>
+        <script src="data/EquipamentosDroguerias_6.js"></script>
+        <script src="data/SALUD_GJOSON_7.js"></script>
+        <script src="data/EquipamentosEducacion_8.js"></script>
+        <script src="data/Viashospitalarias_9.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[3.409388724037676,-76.57766473448119],[3.4321566842023676,-76.54436509789902]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleTerrain_0');
+        map.getPane('pane_GoogleTerrain_0').style.zIndex = 400;
+        var layer_GoogleTerrain_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleTerrain_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleTerrain_0;
+        map.addLayer(layer_GoogleTerrain_0);
+        function pop_Comuna20_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">comuna</th>\
+                        <td>' + (feature.properties['comuna'] !== null ? autolinker.link(feature.properties['comuna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nombre</th>\
+                        <td>' + (feature.properties['nombre'] !== null ? autolinker.link(feature.properties['nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Comuna20_1_0() {
+            return {
+                pane: 'pane_Comuna20_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(37,237,224,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Comuna20_1');
+        map.getPane('pane_Comuna20_1').style.zIndex = 401;
+        map.getPane('pane_Comuna20_1').style['mix-blend-mode'] = 'normal';
+        var layer_Comuna20_1 = new L.geoJson(json_Comuna20_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Comuna20_1',
+            layerName: 'layer_Comuna20_1',
+            pane: 'pane_Comuna20_1',
+            onEachFeature: pop_Comuna20_1,
+            style: style_Comuna20_1_0,
+        });
+        bounds_group.addLayer(layer_Comuna20_1);
+        map.addLayer(layer_Comuna20_1);
+        function pop_Barrioscomuna20_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id_barrio</th>\
+                        <td>' + (feature.properties['id_barrio'] !== null ? autolinker.link(feature.properties['id_barrio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">barrio</th>\
+                        <td>' + (feature.properties['barrio'] !== null ? autolinker.link(feature.properties['barrio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">comuna</th>\
+                        <td>' + (feature.properties['comuna'] !== null ? autolinker.link(feature.properties['comuna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">estra_moda</th>\
+                        <td>' + (feature.properties['estra_moda'] !== null ? autolinker.link(feature.properties['estra_moda'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">area</th>\
+                        <td>' + (feature.properties['area'] !== null ? autolinker.link(feature.properties['area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">perimetro</th>\
+                        <td>' + (feature.properties['perimetro'] !== null ? autolinker.link(feature.properties['perimetro'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Barrioscomuna20_2_0(feature) {
+            switch(String(feature.properties['barrio'])) {
+                case 'Belén':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(111,215,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Belisario Caicedo':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(37,231,31,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Brisas de Mayo':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(148,212,20,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cañaveral':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(91,228,17,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cementerio - Carabineros':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(150,76,224,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Cortijo':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,95,82,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Lido':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,99,222,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Sultana':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,202,142,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lleras Camargo':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,147,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pueblo Joven':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,166,50,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Isabel':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,204,106,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sector Altos de Santa Isabel':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,86,115,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sector Cañaveralejo Guadalupe':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,35,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Siloé':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,140,86,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tierra Blanca':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(142,124,220,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Unidad Residencial El Coliseo':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,38,135,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Urbanización Nueva Granada':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(14,217,71,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Venezuela - Urbanización Cañaveralejo':
+                    return {
+                pane: 'pane_Barrioscomuna20_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(41,124,225,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Barrioscomuna20_2');
+        map.getPane('pane_Barrioscomuna20_2').style.zIndex = 402;
+        map.getPane('pane_Barrioscomuna20_2').style['mix-blend-mode'] = 'normal';
+        var layer_Barrioscomuna20_2 = new L.geoJson(json_Barrioscomuna20_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Barrioscomuna20_2',
+            layerName: 'layer_Barrioscomuna20_2',
+            pane: 'pane_Barrioscomuna20_2',
+            onEachFeature: pop_Barrioscomuna20_2,
+            style: style_Barrioscomuna20_2_0,
+        });
+        bounds_group.addLayer(layer_Barrioscomuna20_2);
+        map.addLayer(layer_Barrioscomuna20_2);
+        function pop_Manzanascomuna20_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">codigo</th>\
+                        <td>' + (feature.properties['codigo'] !== null ? autolinker.link(feature.properties['codigo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">estrato</th>\
+                        <td>' + (feature.properties['estrato'] !== null ? autolinker.link(feature.properties['estrato'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">fecha</th>\
+                        <td>' + (feature.properties['fecha'] !== null ? autolinker.link(feature.properties['fecha'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">observacio</th>\
+                        <td>' + (feature.properties['observacio'] !== null ? autolinker.link(feature.properties['observacio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Manzanascomuna20_3_0() {
+            return {
+                pane: 'pane_Manzanascomuna20_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Manzanascomuna20_3');
+        map.getPane('pane_Manzanascomuna20_3').style.zIndex = 403;
+        map.getPane('pane_Manzanascomuna20_3').style['mix-blend-mode'] = 'normal';
+        var layer_Manzanascomuna20_3 = new L.geoJson(json_Manzanascomuna20_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Manzanascomuna20_3',
+            layerName: 'layer_Manzanascomuna20_3',
+            pane: 'pane_Manzanascomuna20_3',
+            onEachFeature: pop_Manzanascomuna20_3,
+            style: style_Manzanascomuna20_3_0,
+        });
+        bounds_group.addLayer(layer_Manzanascomuna20_3);
+        map.addLayer(layer_Manzanascomuna20_3);
+        function pop_EqupamentosBienestarsoc_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">nombre</th>\
+                        <td>' + (feature.properties['nombre'] !== null ? autolinker.link(feature.properties['nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">localizaci</th>\
+                        <td>' + (feature.properties['localizaci'] !== null ? autolinker.link(feature.properties['localizaci'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">servicio</th>\
+                        <td>' + (feature.properties['servicio'] !== null ? autolinker.link(feature.properties['servicio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tipo</th>\
+                        <td>' + (feature.properties['tipo'] !== null ? autolinker.link(feature.properties['tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">propiedad</th>\
+                        <td>' + (feature.properties['propiedad'] !== null ? autolinker.link(feature.properties['propiedad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">escala</th>\
+                        <td>' + (feature.properties['escala'] !== null ? autolinker.link(feature.properties['escala'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">permanenci</th>\
+                        <td>' + (feature.properties['permanenci'] !== null ? autolinker.link(feature.properties['permanenci'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">estruc_eco</th>\
+                        <td>' + (feature.properties['estruc_eco'] !== null ? autolinker.link(feature.properties['estruc_eco'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EqupamentosBienestarsoc_4_0() {
+            return {
+                pane: 'pane_EqupamentosBienestarsoc_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,155,111,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EqupamentosBienestarsoc_4');
+        map.getPane('pane_EqupamentosBienestarsoc_4').style.zIndex = 404;
+        map.getPane('pane_EqupamentosBienestarsoc_4').style['mix-blend-mode'] = 'normal';
+        var layer_EqupamentosBienestarsoc_4 = new L.geoJson(json_EqupamentosBienestarsoc_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EqupamentosBienestarsoc_4',
+            layerName: 'layer_EqupamentosBienestarsoc_4',
+            pane: 'pane_EqupamentosBienestarsoc_4',
+            onEachFeature: pop_EqupamentosBienestarsoc_4,
+            style: style_EqupamentosBienestarsoc_4_0,
+        });
+        bounds_group.addLayer(layer_EqupamentosBienestarsoc_4);
+        map.addLayer(layer_EqupamentosBienestarsoc_4);
+        function pop_EquipamentosCementerios_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">nombre</th>\
+                        <td>' + (feature.properties['nombre'] !== null ? autolinker.link(feature.properties['nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">localizaci</th>\
+                        <td>' + (feature.properties['localizaci'] !== null ? autolinker.link(feature.properties['localizaci'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">servicio</th>\
+                        <td>' + (feature.properties['servicio'] !== null ? autolinker.link(feature.properties['servicio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tipo</th>\
+                        <td>' + (feature.properties['tipo'] !== null ? autolinker.link(feature.properties['tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">propiedad</th>\
+                        <td>' + (feature.properties['propiedad'] !== null ? autolinker.link(feature.properties['propiedad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">escala</th>\
+                        <td>' + (feature.properties['escala'] !== null ? autolinker.link(feature.properties['escala'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">permanenci</th>\
+                        <td>' + (feature.properties['permanenci'] !== null ? autolinker.link(feature.properties['permanenci'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">estruc_eco</th>\
+                        <td>' + (feature.properties['estruc_eco'] !== null ? autolinker.link(feature.properties['estruc_eco'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EquipamentosCementerios_5_0() {
+            return {
+                pane: 'pane_EquipamentosCementerios_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(150,150,150,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EquipamentosCementerios_5');
+        map.getPane('pane_EquipamentosCementerios_5').style.zIndex = 405;
+        map.getPane('pane_EquipamentosCementerios_5').style['mix-blend-mode'] = 'normal';
+        var layer_EquipamentosCementerios_5 = new L.geoJson(json_EquipamentosCementerios_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EquipamentosCementerios_5',
+            layerName: 'layer_EquipamentosCementerios_5',
+            pane: 'pane_EquipamentosCementerios_5',
+            onEachFeature: pop_EquipamentosCementerios_5,
+            style: style_EquipamentosCementerios_5_0,
+        });
+        bounds_group.addLayer(layer_EquipamentosCementerios_5);
+        map.addLayer(layer_EquipamentosCementerios_5);
+        function pop_EquipamentosDroguerias_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">comuna</th>\
+                        <td>' + (feature.properties['comuna'] !== null ? autolinker.link(feature.properties['comuna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nombredrogueria</th>\
+                        <td>' + (feature.properties['nombredrogueria'] !== null ? autolinker.link(feature.properties['nombredrogueria'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">direccion</th>\
+                        <td>' + (feature.properties['direccion'] !== null ? autolinker.link(feature.properties['direccion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tipo</th>\
+                        <td>' + (feature.properties['tipo'] !== null ? autolinker.link(feature.properties['tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EquipamentosDroguerias_6_0() {
+            return {
+                pane: 'pane_EquipamentosDroguerias_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,158,23,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EquipamentosDroguerias_6');
+        map.getPane('pane_EquipamentosDroguerias_6').style.zIndex = 406;
+        map.getPane('pane_EquipamentosDroguerias_6').style['mix-blend-mode'] = 'normal';
+        var layer_EquipamentosDroguerias_6 = new L.geoJson(json_EquipamentosDroguerias_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EquipamentosDroguerias_6',
+            layerName: 'layer_EquipamentosDroguerias_6',
+            pane: 'pane_EquipamentosDroguerias_6',
+            onEachFeature: pop_EquipamentosDroguerias_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EquipamentosDroguerias_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EquipamentosDroguerias_6);
+        map.addLayer(layer_EquipamentosDroguerias_6);
+        function pop_SALUD_GJOSON_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">comuna</th>\
+                        <td>' + (feature.properties['comuna'] !== null ? autolinker.link(feature.properties['comuna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">barrio</th>\
+                        <td>' + (feature.properties['barrio'] !== null ? autolinker.link(feature.properties['barrio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nombre</th>\
+                        <td>' + (feature.properties['nombre'] !== null ? autolinker.link(feature.properties['nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tipo</th>\
+                        <td>' + (feature.properties['tipo'] !== null ? autolinker.link(feature.properties['tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">direccion</th>\
+                        <td>' + (feature.properties['direccion'] !== null ? autolinker.link(feature.properties['direccion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SALUD_GJOSON_7_0(feature) {
+            switch(String(feature.properties['tipo'])) {
+                case 'EPS':
+                    return {
+                pane: 'pane_SALUD_GJOSON_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,32,13,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'IPS':
+                    return {
+                pane: 'pane_SALUD_GJOSON_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(28,255,3,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_SALUD_GJOSON_7');
+        map.getPane('pane_SALUD_GJOSON_7').style.zIndex = 407;
+        map.getPane('pane_SALUD_GJOSON_7').style['mix-blend-mode'] = 'normal';
+        var layer_SALUD_GJOSON_7 = new L.geoJson(json_SALUD_GJOSON_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SALUD_GJOSON_7',
+            layerName: 'layer_SALUD_GJOSON_7',
+            pane: 'pane_SALUD_GJOSON_7',
+            onEachFeature: pop_SALUD_GJOSON_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_SALUD_GJOSON_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_SALUD_GJOSON_7);
+        map.addLayer(layer_SALUD_GJOSON_7);
+        function pop_EquipamentosEducacion_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">comuna</th>\
+                        <td>' + (feature.properties['comuna'] !== null ? autolinker.link(feature.properties['comuna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tipo</th>\
+                        <td>' + (feature.properties['tipo'] !== null ? autolinker.link(feature.properties['tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nombres</th>\
+                        <td>' + (feature.properties['nombres'] !== null ? autolinker.link(feature.properties['nombres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">direccion</th>\
+                        <td>' + (feature.properties['direccion'] !== null ? autolinker.link(feature.properties['direccion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EquipamentosEducacion_8_0() {
+            return {
+                pane: 'pane_EquipamentosEducacion_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EquipamentosEducacion_8');
+        map.getPane('pane_EquipamentosEducacion_8').style.zIndex = 408;
+        map.getPane('pane_EquipamentosEducacion_8').style['mix-blend-mode'] = 'normal';
+        var layer_EquipamentosEducacion_8 = new L.geoJson(json_EquipamentosEducacion_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EquipamentosEducacion_8',
+            layerName: 'layer_EquipamentosEducacion_8',
+            pane: 'pane_EquipamentosEducacion_8',
+            onEachFeature: pop_EquipamentosEducacion_8,
+            style: style_EquipamentosEducacion_8_0,
+        });
+        bounds_group.addLayer(layer_EquipamentosEducacion_8);
+        map.addLayer(layer_EquipamentosEducacion_8);
+        function pop_Viashospitalarias_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">tipo</th>\
+                        <td>' + (feature.properties['tipo'] !== null ? autolinker.link(feature.properties['tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nombres</th>\
+                        <td>' + (feature.properties['nombres'] !== null ? autolinker.link(feature.properties['nombres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">estado</th>\
+                        <td>' + (feature.properties['estado'] !== null ? autolinker.link(feature.properties['estado'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Viashospitalarias_9_0() {
+            return {
+                pane: 'pane_Viashospitalarias_9',
+                opacity: 1,
+                color: 'rgba(229,182,54,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Viashospitalarias_9');
+        map.getPane('pane_Viashospitalarias_9').style.zIndex = 409;
+        map.getPane('pane_Viashospitalarias_9').style['mix-blend-mode'] = 'normal';
+        var layer_Viashospitalarias_9 = new L.geoJson(json_Viashospitalarias_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Viashospitalarias_9',
+            layerName: 'layer_Viashospitalarias_9',
+            pane: 'pane_Viashospitalarias_9',
+            onEachFeature: pop_Viashospitalarias_9,
+            style: style_Viashospitalarias_9_0,
+        });
+        bounds_group.addLayer(layer_Viashospitalarias_9);
+        map.addLayer(layer_Viashospitalarias_9);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>TALLER 2 DISEÑOS DE PROYECTOS EN SIG </h2>';
+            };
+            title.addTo(map);
+            var abstract = new L.Control({'position':'bottomleft'});
+            abstract.onAdd = function (map) {
+                this._div = L.DomUtil.create('div',
+                'leaflet-control abstract');
+                this._div.id = 'abstract'
+
+                    abstract.show();
+                    return this._div;
+                };
+                abstract.show = function () {
+                    this._div.classList.remove("abstract");
+                    this._div.classList.add("abstractUncollapsed");
+                    this._div.innerHTML = 'Taller 2 - Diseños de proyectos en SIG<br />Autor Maria Paula Panteve';
+            };
+            abstract.addTo(map);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Viashospitalarias_9.png" /> Vias hospitalarias': layer_Viashospitalarias_9,'<img src="legend/EquipamentosEducacion_8.png" /> Equipamentos Educacion': layer_EquipamentosEducacion_8,'SALUD_GJOSON<br /><table><tr><td style="text-align: center;"><img src="legend/SALUD_GJOSON_7_EPS0.png" /></td><td>EPS</td></tr><tr><td style="text-align: center;"><img src="legend/SALUD_GJOSON_7_IPS1.png" /></td><td>IPS</td></tr></table>': layer_SALUD_GJOSON_7,'<img src="legend/EquipamentosDroguerias_6.png" /> Equipamentos Droguerias': layer_EquipamentosDroguerias_6,'<img src="legend/EquipamentosCementerios_5.png" /> Equipamentos Cementerios': layer_EquipamentosCementerios_5,'<img src="legend/EqupamentosBienestarsoc_4.png" /> Equpamentos Bienestar soc.': layer_EqupamentosBienestarsoc_4,'<img src="legend/Manzanascomuna20_3.png" /> Manzanas comuna 20': layer_Manzanascomuna20_3,'Barrios comuna 20<br /><table><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_Belén0.png" /></td><td>Belén</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_BelisarioCaicedo1.png" /></td><td>Belisario Caicedo</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_BrisasdeMayo2.png" /></td><td>Brisas de Mayo</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_Cañaveral3.png" /></td><td>Cañaveral</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_CementerioCarabineros4.png" /></td><td>Cementerio - Carabineros</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_ElCortijo5.png" /></td><td>El Cortijo</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_ElLido6.png" /></td><td>El Lido</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_LaSultana7.png" /></td><td>La Sultana</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_LlerasCamargo8.png" /></td><td>Lleras Camargo</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_PuebloJoven9.png" /></td><td>Pueblo Joven</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_SantaIsabel10.png" /></td><td>Santa Isabel</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_SectorAltosdeSantaIsabel11.png" /></td><td>Sector Altos de Santa Isabel</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_SectorCañaveralejoGuadalupe12.png" /></td><td>Sector Cañaveralejo Guadalupe</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_Siloé13.png" /></td><td>Siloé</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_TierraBlanca14.png" /></td><td>Tierra Blanca</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_UnidadResidencialElColiseo15.png" /></td><td>Unidad Residencial El Coliseo</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_UrbanizaciónNuevaGranada16.png" /></td><td>Urbanización Nueva Granada</td></tr><tr><td style="text-align: center;"><img src="legend/Barrioscomuna20_2_VenezuelaUrbanizaciónCañaveralejo17.png" /></td><td>Venezuela - Urbanización Cañaveralejo</td></tr></table>': layer_Barrioscomuna20_2,'<img src="legend/Comuna20_1.png" /> Comuna 20': layer_Comuna20_1,"Google Terrain": layer_GoogleTerrain_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
